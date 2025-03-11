@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .profile-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        #profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <img id="profile-pic" src="me.jpg" alt="Profile Picture">
+        <input type="file" id="imageUpload" accept="image/*">
+        <input type="text" id="name" placeholder="Enter name">
+        <input type="email" id="email" placeholder="Enter email">
+        <textarea id="bio" placeholder="Enter bio"></textarea>
+        <button onclick="updateProfile()">Update Profile</button>
+        <h3 id="displayName">Name: </h3>
+        <p id="displayEmail">Email: </p>
+        <p id="displayBio">Bio: </p>
+    </div>
+
+    <script>
+        function updateProfile() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const bio = document.getElementById('bio').value;
+            const imageUpload = document.getElementById('imageUpload').files[0];
+            const profilePic = document.getElementById('profile-pic');
+
+            document.getElementById('displayName').textContent = "Name: " + name;
+            document.getElementById('displayEmail').textContent = "Email: " + email;
+            document.getElementById('displayBio').textContent = "Bio: " + bio;
+
+            if (imageUpload) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic.src = e.target.result;
+                };
+                reader.readAsDataURL(imageUpload);
+            }
+        }
+    </script>
+</body>
+</html>
